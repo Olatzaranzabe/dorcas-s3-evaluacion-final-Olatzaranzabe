@@ -4,11 +4,15 @@ import CharacterCard from './CharacterCard';
 class CharacterList extends Component {
 
     render() {
-        const { characters } = this.props
+        const { 
+            characters,
+            charactersFiltered
+        
+        } = this.props
         return (
             <div>
                 <ul className="listado">
-                    {characters.map(character =>
+                    {(charactersFiltered||characters).map(character =>
                         (<li className="listElement">
                             <CharacterCard
                                 name={character.name}

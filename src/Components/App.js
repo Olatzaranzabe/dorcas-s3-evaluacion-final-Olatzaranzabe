@@ -9,7 +9,9 @@ class App extends Component {
     super(props)
 
     this.state = {
-      characters: []
+      characters: [],
+      someCharacters:[],
+      name: ''
     }
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
   }
@@ -34,15 +36,23 @@ class App extends Component {
     const inputValue = event.target.value
 
     this.setState({
-      titulo: inputValue
+      name: inputValue
     });
+    const characters = [...this.state.characters]
+    
+    const charactersFiltered = characters.filter(function(characters){
+      return characters.name.includes(inputValue)
+    })
+    console.log(charactersFiltered)
   }
+
   render() {
     const { characters } = this.state
+
     return (
       <div className="App">
         <Header />
-        <Filters onInputChange={this.handleSearchCharacters}/>
+        <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
         <CharacterList characters={characters} />
 
       </div>
