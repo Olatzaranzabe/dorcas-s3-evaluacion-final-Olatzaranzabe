@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       characters: []
     }
+    this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
   }
 
   componentDidMount() {
@@ -18,20 +19,30 @@ class App extends Component {
   }
   fetchHarryPotter() {
     fetch('http://hp-api.herokuapp.com/api/characters')
-    .then((response) => response.json())
-    .then((jsoncharacters) => {
-      this.setState({
-        characters: jsoncharacters
+      .then((response) => response.json())
+      .then((jsoncharacters) => {
+        this.setState({
+          characters: jsoncharacters
+        });
+        console.log(jsoncharacters)
+
       });
-      console.log(jsoncharacters)
-     
+  }
+
+  handleSearchCharacters(event) {
+    console.log(event.target.value)
+    const inputValue = event.target.value
+
+    this.setState({
+      titulo: inputValue
     });
   }
   render() {
-    const {characters} = this.state
+    const { characters } = this.state
     return (
       <div className="App">
         <Header />
+        <Filters onInputChange={this.handleSearchCharacters}/>
         <CharacterList characters={characters} />
 
       </div>
