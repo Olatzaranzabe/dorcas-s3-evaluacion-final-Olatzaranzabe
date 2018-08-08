@@ -9,7 +9,7 @@ class CharacterList extends Component {
             characters,
             charactersFiltered
         } = this.props
-
+        console.log(characters[2])
         console.log(this.props.charactersFiltered)
         let filterNoFilter
         if (charactersFiltered.length > 0) {
@@ -17,6 +17,7 @@ class CharacterList extends Component {
         } else {
             filterNoFilter = characters
         }
+        console.log(characters)
         return (
             <div>
                 <ul className="listado">
@@ -24,8 +25,8 @@ class CharacterList extends Component {
                         (<li key={character.id} className="listElement">
                             <Link className="character__detail" to={`/character/${character.id}`}>
                                 <CharacterCard
-                                    name={character.name}
                                     image={character.image}
+                                    name={character.name}
                                     house={character.house}
                                 />
                             </Link>

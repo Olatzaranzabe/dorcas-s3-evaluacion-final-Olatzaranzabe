@@ -13,10 +13,14 @@ class App extends Component {
     this.state = {
       characters: [],
       charactersFiltered: [],
-      name: ''
+      name: '',
+      charactersWithId: [],
+      charactersCopyWithId: []
+
     }
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
-    let charactersWithId = [];
+    this.handleSelectCharacter = this.handleSelectCharacter.bind(this)
+
   }
 
   componentDidMount() {
@@ -35,49 +39,59 @@ class App extends Component {
 
       });
   }
-  addID(){
-    for(let i = 0; i <this.state.characters.length; i++) {
-  this.state.characters[i] = {
-    ...this.state.characters[i],
-    ID: i
-  }
-}
-// console.log(jsoncharacters)
+  addID() {
+    const arrayCopy = [...this.state.characters]
+    for (let i = 0; i < arrayCopy.length; i++) {
+      arrayCopy[i] = {
+        ...arrayCopy[i],
+        ID: i
+      }
+      this.setState({ charactersCopyWithId: arrayCopy })
+
     }
+  console.log(this.state.charactersCopyWithId)
+  }
 
-handleSearchCharacters(event) {
-  console.log(event.target.value)
-  const inputValue = event.target.value
+  handleSearchCharacters(event) {
+    console.log(event.target.value)
+    const inputValue = event.target.value
 
-  this.setState({
-    name: inputValue
-  });
-  const characters = [...this.state.characters]
+    this.setState({
+      name: inputValue
+    });
+    const characters = [...this.state.characters]
 
-  const charactersFiltered = characters.filter(function (characters) {
-    return characters.name.includes(inputValue)
-  })
-  console.log(charactersFiltered)
-  this.setState({ charactersFiltered: charactersFiltered })
-}
+    const charactersFiltered = characters.filter(function (characters) {
+      return characters.name.includes(inputValue)
+    })
+    console.log(charactersFiltered)
+    this.setState({ charactersFiltered: charactersFiltered })
+  }
 
-render() {
-  const { characters } = this.state
-  console.log(this.state.charactersFiltered)
-  return (
-    <div className="App">
-      <Header />
-      <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
-      <Switch>
-        <Route exact path='/' render={(props) => <CharacterList characters={characters} charactersFiltered={this.state.charactersFiltered} />
-        } />
-        <Route path='/character/:ID' render={() =>
-          <Detail characters={characters} />}
-        />
-      </Switch>
-    </div>
-  );
-}
+  handleSelectCharacter() {
+    console.log('holi')
+  }
+
+  render() {
+    console.log(this.state.arrayCopy)
+    const { characters } = this.state
+    const { charactersCopyWithId } = this.state
+    console.log(this.state.charactersFiltered)
+    console.log(this.state.charactersCopyWithId)
+    return (
+      <div className="App">
+        <Header />
+        <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
+        <Switch>
+          <Route exact path='/' render={(props) => <CharacterList characters={characters} charactersFiltered={this.state.charactersFiltered} />
+          } />
+          <Route path='/character/:ID' render={() =>
+            <Detail onSelectCharacter={this.handleSelectCharacter} charactersCopyWithId={this.state.charactersCopyWithId} characters={characters} dateOfBirth={this.dateOfBirth} />}
+          />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
