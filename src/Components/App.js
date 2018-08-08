@@ -10,10 +10,11 @@ class App extends Component {
 
     this.state = {
       characters: [],
-      someCharacters:[],
+      charactersFiltered:[],
       name: ''
     }
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
+    
   }
 
   componentDidMount() {
@@ -44,16 +45,17 @@ class App extends Component {
       return characters.name.includes(inputValue)
     })
     console.log(charactersFiltered)
+    this.setState({charactersFiltered: charactersFiltered})
   }
 
   render() {
     const { characters } = this.state
-
+console.log(this.state.charactersFiltered)
     return (
       <div className="App">
         <Header />
         <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
-        <CharacterList characters={characters} />
+        <CharacterList characters={characters} charactersFiltered={this.state.charactersFiltered} />
 
       </div>
     );

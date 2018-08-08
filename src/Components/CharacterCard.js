@@ -6,7 +6,7 @@ class CharacterCard extends Component {
         const {
             name,
             image,
-            house
+            house,
         } = this.props
         return ( 
             <div>
