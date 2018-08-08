@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import './App.css';
 import CharacterList from './CharacterList';
 import Filters from './Filters';
+import Detail from './Detail';
 
 class App extends Component {
   constructor(props) {
@@ -10,11 +12,11 @@ class App extends Component {
 
     this.state = {
       characters: [],
-      charactersFiltered:[],
+      charactersFiltered: [],
       name: ''
     }
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
-    
+    let charactersWithId = [];
   }
 
   componentDidMount() {
@@ -26,40 +28,56 @@ class App extends Component {
       .then((jsoncharacters) => {
         this.setState({
           characters: jsoncharacters
-        });
-        console.log(jsoncharacters)
+        },
+          this.addID
+        )
+
 
       });
   }
-
-  handleSearchCharacters(event) {
-    console.log(event.target.value)
-    const inputValue = event.target.value
-
-    this.setState({
-      name: inputValue
-    });
-    const characters = [...this.state.characters]
-    
-    const charactersFiltered = characters.filter(function(characters){
-      return characters.name.includes(inputValue)
-    })
-    console.log(charactersFiltered)
-    this.setState({charactersFiltered: charactersFiltered})
+  addID(){
+    for(let i = 0; i <this.state.characters.length; i++) {
+  this.state.characters[i] = {
+    ...this.state.characters[i],
+    ID: i
   }
+}
+// console.log(jsoncharacters)
+    }
 
-  render() {
-    const { characters } = this.state
-console.log(this.state.charactersFiltered)
-    return (
-      <div className="App">
-        <Header />
-        <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
-        <CharacterList characters={characters} charactersFiltered={this.state.charactersFiltered} />
+handleSearchCharacters(event) {
+  console.log(event.target.value)
+  const inputValue = event.target.value
 
-      </div>
-    );
-  }
+  this.setState({
+    name: inputValue
+  });
+  const characters = [...this.state.characters]
+
+  const charactersFiltered = characters.filter(function (characters) {
+    return characters.name.includes(inputValue)
+  })
+  console.log(charactersFiltered)
+  this.setState({ charactersFiltered: charactersFiltered })
+}
+
+render() {
+  const { characters } = this.state
+  console.log(this.state.charactersFiltered)
+  return (
+    <div className="App">
+      <Header />
+      <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
+      <Switch>
+        <Route exact path='/' render={(props) => <CharacterList characters={characters} charactersFiltered={this.state.charactersFiltered} />
+        } />
+        <Route path='/character/:ID' render={() =>
+          <Detail characters={characters} />}
+        />
+      </Switch>
+    </div>
+  );
+}
 }
 
 export default App;
