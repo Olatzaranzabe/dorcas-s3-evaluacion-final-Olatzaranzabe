@@ -1,5 +1,10 @@
+*{
+  box-sizing:border-box;
+}
+
 .element__name{
     color: white;
+    
   }
 
 .listado {
@@ -11,16 +16,22 @@
   
   .listElement {
     height: 450px;
-    width: auto;
+    width: 230px;
     background-color: #ff7753;
     margin:10px;
+    transition:transform ease 0.5s;
+
   }
-  
+
+  .listElement:hover { 
+    transform: scale(1.1);
+  }
+
   .element__photo {
     height: 300px;
-    width: 230px;;
+    width: 230px;
   }
-  
+
   .element__house{
     text-decoration: none;
     color: white;

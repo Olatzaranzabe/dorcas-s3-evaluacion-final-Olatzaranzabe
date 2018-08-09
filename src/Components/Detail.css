@@ -10,16 +10,26 @@
   display: flex;
   background-color: #ff7753;
   color: white;
+  width: 500px;
+  height: 280px;
 } 
-  
+
+.detail__listado {
+  display: flex;
+  justify-content: center;
+
+}
+
 .detail__character{
   display: flex;
   flex-direction: column;
   margin: 10px;
+  padding-left:30px;
 }
 
-.detail__name {
+.detail__title{
   text-align: center;
+  font-size: 24px;
 }
 
 .detail__image {
@@ -32,4 +42,9 @@
   font-size: 16px;
   color: white;
   background-color: #ff7753;
+  transition:transform ease 0.2s;
+}
+
+.link__home:hover { 
+  transform: scale(1.05);
 }

@@ -12,11 +12,11 @@ class Detail extends Component {
         console.log(this.props.match.params.id)
         const matchId = this.props.match.params.id
         const matchParamsId = parseInt(matchId);
-        
+
         return (
             <div className="detail__container">
                 <Link to="/"><button className="link__home">Home </button> </Link>
-                <ul>
+                <ul className="detail__listado">
                     {charactersCopyWithId.map(function (item) {
                         if (item.id === matchParamsId) {
                             return(
@@ -25,7 +25,7 @@ class Detail extends Component {
                                     <img className="detail__image" src={item.image} alt="character image" />
                                 </div>
                                 <div className="detail__character">
-                                    <h3 className=" ">{item.name}</h3>
+                                    <h3 className="detail__title">{item.name}</h3>
                                     <p>Casa: {item.house}</p>
                                     <p>Nacimiento: {item.yearOfBirth}</p>
                                     <p>Patronus: {item.patronus}</p>
