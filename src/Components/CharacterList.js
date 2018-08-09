@@ -6,24 +6,25 @@ class CharacterList extends Component {
 
     render() {
         const {
-            characters,
-            charactersFiltered
+            charactersFiltered,
+            charactersCopyWithId
         } = this.props
-        console.log(characters[2])
+        console.log(charactersCopyWithId)
         console.log(this.props.charactersFiltered)
         let filterNoFilter
         if (charactersFiltered.length > 0) {
             filterNoFilter = charactersFiltered
         } else {
-            filterNoFilter = characters
+            filterNoFilter = charactersCopyWithId
         }
-        console.log(characters)
+        console.log(charactersCopyWithId)
+
         return (
             <div>
                 <ul className="listado">
-                    {filterNoFilter.map(character =>
-                        (<li key={character.id} className="listElement">
-                            <Link className="character__detail" to={`/character/${character.id}`}>
+                    {filterNoFilter.map((character, index) =>
+                        (<li key={index} className="listElement">
+                            <Link className="character__detail" to={`/character/${character.id}`} >
                                 <CharacterCard
                                     image={character.image}
                                     name={character.name}
