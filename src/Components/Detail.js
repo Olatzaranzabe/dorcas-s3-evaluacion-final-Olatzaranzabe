@@ -6,36 +6,33 @@ class Detail extends Component {
     render() {
         const {
             charactersCopyWithId,
-            match,
+            match
         } = this.props
         console.log(charactersCopyWithId)
-        console.log(this.props.match)
-        console.log(match)
-        const theCharacter = {}
-        if (this.props.charactersCopyWithId.length >= 1) {
-            const filtroID = this.props.match.params.id;
-            const charactersCopyWithId = this.props.charactersCopyWithId;
-            console.log(filtroID)
-            console.log(this.props.charactersCopyWithId)
-            charactersCopyWithId.filter((item) => {
-                return item.id === filtroID;
-            });
-            const theCharacter = charactersCopyWithId[0];
+        console.log(this.props.match.params.id)
 
-            console.log(theCharacter.house)
-        }
-        const house = theCharacter.house
+
         return (
 
             <div className="detail__container">
-                <Link to="/">Home </Link>
-                <img src="" alt="" />
-                <h2>Hola</h2>
+                {/* <Link to="/">Home </Link> */}
                 <ul>
-                    <li>Casa:</li>
-                    <li>Nacimiento:</li>
-                    <li>Patronus:</li>
-                    <li>Estado:</li>
+                    {charactersCopyWithId.map(function (item, index) {
+
+                        if (item.id == match.params.id) {
+                            return <li>
+                                <div>
+                                    <img src={item.image} alt="" />
+                                </div>
+                                <div>
+                                    <h3>{item.name}</h3>
+                                    <p>{item.yearOfBirth}</p>
+                                    <p>{item.patronus}</p>
+                                    <p>{item.house}</p>
+                                </div>
+                            </li>
+                        }
+                    })}
                 </ul>
             </div>
         );
