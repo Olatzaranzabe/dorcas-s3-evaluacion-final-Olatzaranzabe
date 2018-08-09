@@ -10,25 +10,31 @@ class Detail extends Component {
         } = this.props
         console.log(charactersCopyWithId)
         console.log(this.props.match.params.id)
-
+        // const status = 
+        // if(charactersCopyWithId.alive ==true){
+        //     return 'viv@'
+        // } else {
+        //     'muert@'
+        // }
 
         return (
 
             <div className="detail__container">
-                {/* <Link to="/">Home </Link> */}
+                <Link to="/">Home </Link>
                 <ul>
                     {charactersCopyWithId.map(function (item, index) {
-
                         if (item.id == match.params.id) {
-                            return <li>
+
+                            return <li className="detail__element">
                                 <div>
                                     <img src={item.image} alt="" />
                                 </div>
                                 <div>
-                                    <h3>{item.name}</h3>
-                                    <p>{item.yearOfBirth}</p>
-                                    <p>{item.patronus}</p>
-                                    <p>{item.house}</p>
+                                    <h3 className=" ">{item.name}</h3>
+                                    <p>Casa: {item.house}</p>
+                                    <p>Nacimiento: {item.yearOfBirth}</p>
+                                    <p>Patronus: {item.patronus}</p>
+                                    <p>Estado: {item.alive?' viv@':' muert@'}</p>
                                 </div>
                             </li>
                         }

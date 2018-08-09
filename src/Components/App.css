@@ -62,3 +62,15 @@
 .character__detail{
   text-decoration: none
 }
+
+.detail__element {
+  display: flex;
+  background-color: #ff7753;
+  color: white;
+} 
+
+.detail__name {
+  text-align: center;
+
+
+}
