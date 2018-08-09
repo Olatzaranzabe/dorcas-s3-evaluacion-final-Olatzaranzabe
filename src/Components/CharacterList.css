@@ -1,0 +1,29 @@
+.element__name{
+    color: white;
+  }
+
+.listado {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-between;
+  }
+  
+  .listElement {
+    height: 450px;
+    width: auto;
+    background-color: #ff7753;
+    margin:10px;
+  }
+  
+  .element__photo {
+    height: 300px;
+    width: 230px;;
+  }
+  
+  .element__house{
+    text-decoration: none;
+    color: white;
+  }
+  
+  

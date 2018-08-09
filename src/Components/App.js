@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 import './App.css';
 import CharacterList from './CharacterList';
 import Filters from './Filters';
@@ -62,7 +63,7 @@ class App extends Component {
     const charactersCopyWithId = [...this.state.charactersCopyWithId]
 
     const charactersFiltered = charactersCopyWithId.filter(function (charactersCopyWithId) {
-      return charactersCopyWithId.name.includes(inputValue)
+      return charactersCopyWithId.name.toLowerCase().includes(inputValue.toLowerCase())
     })
     console.log(charactersFiltered)
     this.setState({ charactersFiltered: charactersFiltered })
@@ -76,14 +77,28 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Filters onInputChange={this.handleSearchCharacters} name={this.state.name} characters={characters} />
+        <Filters 
+        onInputChange={this.handleSearchCharacters} 
+        name={this.state.name} 
+        characters={characters} />
         <Switch>
-          <Route exact path='/' render={(props) => <CharacterList charactersCopyWithId={charactersCopyWithId} charactersFiltered={this.state.charactersFiltered} />
-          } />
-          <Route path='/character/:id' render={(props) =>
-            <Detail onSelectCharacter={this.handleSelectCharacter} match={props.match} charactersCopyWithId={charactersCopyWithId} characters={characters} />}
+          <Route
+            exact path='/'
+            render={(props) => <CharacterList
+              charactersCopyWithId={charactersCopyWithId}
+              charactersFiltered={this.state.charactersFiltered} />
+            } />
+          <Route
+            path='/character/:id' 
+            render={(props) =>
+              <Detail 
+              onSelectCharacter={this.handleSelectCharacter} 
+              match={props.match} 
+              charactersCopyWithId={charactersCopyWithId} 
+              characters={characters} />}
           />
         </Switch>
+        <Footer />
       </div>
     );
   }

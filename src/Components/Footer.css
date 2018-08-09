@@ -1,0 +1,15 @@
+
+  .footer {
+    display: flex;    
+    justify-content:space-around;
+  }
+  
+    .footer__link-img-adalab {
+    width: 103px;
+    align-self: center;
+    margin-right: 40px;
+  }
+  
+  .footer__img-adalab {
+    width: 103px;
+  }  
