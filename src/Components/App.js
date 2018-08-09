@@ -15,17 +15,16 @@ class App extends Component {
       charactersFiltered: [],
       name: '',
       charactersCopyWithId: [],
-      id:''
+      id: ''
     }
-
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
-    this.handleSelectCharacter = this.handleSelectCharacter.bind(this)
     this.addID = this.addID.bind(this)
   }
 
   componentDidMount() {
     this.fetchHarryPotter();
   }
+
   fetchHarryPotter() {
     fetch('http://hp-api.herokuapp.com/api/characters')
       .then((response) => response.json())
@@ -35,8 +34,6 @@ class App extends Component {
         },
           this.addID
         )
-
-
       });
   }
 
@@ -44,13 +41,11 @@ class App extends Component {
     const arrayCopy = [...this.state.characters]
     let charactersCopyWithId = []
     for (let i = 0; i < arrayCopy.length; i++) {
-     charactersCopyWithId[i] = {
+      charactersCopyWithId[i] = {
         ...arrayCopy[i],
         id: i
       }
-
       this.setState({ charactersCopyWithId: charactersCopyWithId })
-
     }
     console.log(this.state.charactersCopyWithId)
     console.log(arrayCopy)
@@ -64,17 +59,13 @@ class App extends Component {
     this.setState({
       name: inputValue
     });
-    const characters = [...this.state.characters]
+    const charactersCopyWithId = [...this.state.charactersCopyWithId]
 
-    const charactersFiltered = characters.filter(function (characters) {
-      return characters.name.includes(inputValue)
+    const charactersFiltered = charactersCopyWithId.filter(function (charactersCopyWithId) {
+      return charactersCopyWithId.name.includes(inputValue)
     })
     console.log(charactersFiltered)
     this.setState({ charactersFiltered: charactersFiltered })
-  }
-
-  handleSelectCharacter() {
-    console.log('holi')
   }
 
   render() {
@@ -90,7 +81,7 @@ class App extends Component {
           <Route exact path='/' render={(props) => <CharacterList charactersCopyWithId={charactersCopyWithId} charactersFiltered={this.state.charactersFiltered} />
           } />
           <Route path='/character/:id' render={(props) =>
-            <Detail onSelectCharacter={this.handleSelectCharacter} match={props.match} charactersCopyWithId={charactersCopyWithId} characters={characters}  />}
+            <Detail onSelectCharacter={this.handleSelectCharacter} match={props.match} charactersCopyWithId={charactersCopyWithId} characters={characters} />}
           />
         </Switch>
       </div>

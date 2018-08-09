@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './Detail.css';
+// import Skull from 'Skull.png';
 
 class Detail extends Component {
 
@@ -10,21 +12,14 @@ class Detail extends Component {
         } = this.props
         console.log(charactersCopyWithId)
         console.log(this.props.match.params.id)
-        // const status = 
-        // if(charactersCopyWithId.alive ==true){
-        //     return 'viv@'
-        // } else {
-        //     'muert@'
-        // }
 
         return (
 
             <div className="detail__container">
                 <Link to="/">Home </Link>
                 <ul>
-                    {charactersCopyWithId.map(function (item, index) {
+                    {charactersCopyWithId.map(function (item) {
                         if (item.id == match.params.id) {
-
                             return <li className="detail__element">
                                 <div>
                                     <img src={item.image} alt="" />
@@ -34,7 +29,7 @@ class Detail extends Component {
                                     <p>Casa: {item.house}</p>
                                     <p>Nacimiento: {item.yearOfBirth}</p>
                                     <p>Patronus: {item.patronus}</p>
-                                    <p>Estado: {item.alive?' viv@':' muert@'}</p>
+                                    <p>Estado: {item.alive ? ' viv@' : ' 💀'}</p>
                                 </div>
                             </li>
                         }

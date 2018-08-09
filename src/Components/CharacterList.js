@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CharacterCard from './CharacterCard';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class CharacterList extends Component {
 
