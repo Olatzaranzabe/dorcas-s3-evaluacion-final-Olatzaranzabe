@@ -8,7 +8,8 @@ class CharacterList extends Component {
     render() {
         const {
             charactersFiltered,
-            charactersCopyWithId
+            charactersCopyWithId,
+            clickElement
         } = this.props
         console.log(charactersCopyWithId)
         console.log(this.props.charactersFiltered)
@@ -24,14 +25,14 @@ class CharacterList extends Component {
             <div>
                 <ul className="listado">
                     {filterNoFilter.map((character, index) =>
-                        (<li key={index} className="listElement">
-                            <Link className="character__detail" to={`/character/${character.id}`} >
+                        (<li key={index} className="listElement" onClick={clickElement}>
+                            {/* <Link className="character__detail" to={`/character/${character.id}`} > */}
                                 <CharacterCard
                                     image={character.image}
                                     name={character.name}
                                     house={character.house}
                                 />
-                            </Link>
+                            {/* </Link> */}
                         </li>)
                     )}
                 </ul>

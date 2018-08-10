@@ -6,6 +6,7 @@ import './App.css';
 import CharacterList from './CharacterList';
 import Filters from './Filters';
 import Detail from './Detail';
+import Contador from './Contador'
 
 class App extends Component {
   constructor(props) {
@@ -16,10 +17,12 @@ class App extends Component {
       charactersFiltered: [],
       name: '',
       charactersCopyWithId: [],
-      id: ''
+      id: '',
+      contador:0
     }
     this.handleSearchCharacters = this.handleSearchCharacters.bind(this)
     this.addID = this.addID.bind(this)
+    this.clickElement =this.clickElement.bind(this)
   }
 
   componentDidMount() {
@@ -30,11 +33,14 @@ class App extends Component {
     fetch('http://hp-api.herokuapp.com/api/characters')
       .then((response) => response.json())
       .then((jsoncharacters) => {
+      
         this.setState({
           characters: jsoncharacters
         },
           this.addID
         )
+
+
       });
   }
 
@@ -68,6 +74,9 @@ class App extends Component {
     console.log(charactersFiltered)
     this.setState({ charactersFiltered: charactersFiltered })
   }
+  clickElement(){
+    this.setState({contador: (this.state.contador)+1 })
+  }
 
   render() {
     const { characters } = this.state
@@ -77,6 +86,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <Contador value={this.state.contador}/>
         <Filters 
         onInputChange={this.handleSearchCharacters} 
         name={this.state.name} 
@@ -85,6 +95,7 @@ class App extends Component {
           <Route
             exact path='/'
             render={(props) => <CharacterList
+              clickElement={this.clickElement}
               charactersCopyWithId={charactersCopyWithId}
               charactersFiltered={this.state.charactersFiltered} />
             } />
